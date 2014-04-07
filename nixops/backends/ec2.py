@@ -963,7 +963,7 @@ class EC2State(MachineState):
         self.log('sending Route53 DNS: {0} {1}'.format(self.public_ipv4, self.dns_hostname))
 
         self.connect_route53()
-        hosted_zone = ".".join(self.dns_hostname.split(".")[1:])
+        hosted_zone = ".".join(self.dns_hostname.split(".")[-2:])
         zones = self._conn_route53.get_all_hosted_zones()
 
         zones = [zone for zone in zones['ListHostedZonesResponse']['HostedZones'] if "{0}.".format(hosted_zone) == zone.Name]
